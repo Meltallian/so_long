@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/14 16:19:56 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/17 10:42:03 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <limits.h>
-# include "mlx/mlx.h"
+# include "minilibx_macos/mlx.h"
 # include "libft/libft.h"
 
 #endif // SO_LONG_H

@@ -3,10 +3,10 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
 LIBFT = libft/libft.a
-MLX = mlx/libmlx.dylib
+MLX = minilibx_macos/libmlx.a
 SO_LONG_SRC = main.c
 SO_LONG_OBJ = $(SO_LONG_SRC:.c=.o)
-INCLUDES_DIR = -I./includes -I./libft/includes -I./mlx/includes
+INCLUDES_DIR = -I./includes -I./libft/includes -I./minilibx_macos/includes
 
 # Default rule
 all: $(NAME)
@@ -18,10 +18,10 @@ $(SO_LONG_OBJ): %.o: %.c
 $(LIBFT):
 	make -C ./libft
 $(MLX):
-	make -C ./mlx
+	make -C ./minilibx_macos
 
 $(NAME): $(LIBFT) $(MLX) $(SO_LONG_OBJ)
-	$(CC) $(SO_LONG_OBJ) $(LIBFT) $(MLX) -o $(NAME) -L./libft -L./mlx -lft -lmlx
+	$(CC) $(SO_LONG_OBJ) $(LIBFT) $(MLX) -o $(NAME) -L./libft -L./minilibx_macos -lft -lmlx -framework OpenGL -framework AppKit
 
 clean:
 	make clean -C ./libft
