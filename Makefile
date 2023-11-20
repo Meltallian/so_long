@@ -4,10 +4,10 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
 LIBFT = libft/libft.a
 MLX = minilibx_macos/libmlx.a
-SO_LONG_SRC = main.c
+SO_LONG_SRC = ber_parse.c show_image.c sprite_map.c
 SO_LONG_OBJ = $(SO_LONG_SRC:.c=.o)
-INCLUDES_DIR = -I./includes -I./libft/includes -I./minilibx_macos/includes
-
+#INCLUDES_DIR = -I./includes -I./libft/includes -I./minilibx_macos/includes
+#pas necessaire parceque -lft -lmlx dans la ligne cc
 # Default rule
 all: $(NAME)
 
@@ -25,12 +25,12 @@ $(NAME): $(LIBFT) $(MLX) $(SO_LONG_OBJ)
 
 clean:
 	make clean -C ./libft
-	make clean -C ./mlx
+	make clean -C ./minilibx_macos
 	rm -f $(SO_LONG_OBJ)
 
 fclean: clean
 	make fclean -C ./libft
-	make clean -C ./mlx
+	make clean -C ./minilibx_macos
 	rm -f $(NAME)
 
 re: fclean all

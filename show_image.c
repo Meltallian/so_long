@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   show_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:55:38 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/17 13:03:40 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/20 14:27:52 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-typedef struct	s_data {
-	void	*img[5];
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
+/*
 int	main(void)
 {
 	void	*mlx;
@@ -37,8 +29,8 @@ int	main(void)
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 128, 128, "Pog"); // 100 100 = size of the window
 	img.img[0] = mlx_xpm_file_to_image(mlx, relative_path[0], &img_width, &img_height);
-	img.addr = mlx_get_data_addr(img.img[0], &img.bits_per_pixel, &img.line_length,
-								&img.endian);
+//	img.addr = mlx_get_data_addr(img.img[0], &img.bits_per_pixel, &img.line_length,
+//								&img.endian);
 
 	img.img[1] = mlx_xpm_file_to_image(mlx, relative_path[1], &img_width, &img_height);
 //	img.addr = mlx_get_data_addr(img.img[1], &img.bits_per_pixel, &img.line_length,
@@ -67,3 +59,4 @@ int	main(void)
 	mlx_put_image_to_window(mlx, mlx_win, img.img[4], 64, 64);
 	mlx_loop(mlx);
 }
+ */
