@@ -6,18 +6,21 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:59:44 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/20 15:34:14 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/20 17:25:54 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	map_height(int i)
+int	map_height(void)
 {
-	char *line;
-	int fd;
+	char	*line;
+	int		fd;
+	int		i;
 
 	fd = open("map.ber", O_RDONLY);
+	if (fd == -1)
+		return 0;
 	i = 0;
 	while (1)
 	{
@@ -48,24 +51,24 @@ void	parse_ber_file(int fd, t_map *mapping)
 	int		i;
 
 	i = 0;
-	mapping->map = malloc((map_height(mapping->height) + 1)* sizeof(char *));
+	mapping->height = map_height();
+	mapping->map = malloc((mapping->height + 1)* sizeof(char *));
+	if (!mapping->map)
+	{
+		free (mapping->map);
+		return;
+	}
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		mapping->map[i] = line;
-		if (mapping->map[i] == NULL)
-		{
-			ft_free(mapping->map, i);
-			free(mapping->map);
-			break ;
-		}
 		i++;
 	}
 	mapping->map[i] = 0;
 }
-
+/*
 int main()
 {
 	t_map	mapping;
@@ -86,3 +89,4 @@ int main()
 	free(mapping.map);
 	return 0;
 }
+ */
