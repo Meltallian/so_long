@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/20 17:09:34 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/21 09:27:10 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 # include <limits.h>
 # include "minilibx_macos/mlx.h"
 # include "libft/libft.h"
-/*
+
 typedef struct	s_data {
 	void	*img[5];
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}			t_data; */
+}			t_data;
 
 typedef struct s_sprite {
 	void	*img;

@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:23:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/20 17:28:47 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/21 11:03:11 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,48 @@ void	render_map(t_map *game)
 	}
 }
 
+void	img_destr(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < 256)
+	{
+		if (map->sprite_mapping[i].img != NULL)
+		{
+			mlx_destroy_image(map->mlx, map->sprite_mapping[i].img);
+			map->sprite_mapping[i].img = NULL;
+		}
+		i++;
+	}
+}
+
 int main()
 {
 	t_map	game;
 	int		fd;
 	int		i;
 
-	game.map = 0;
+	i = 0;
+	while (i < 256)
+		game.sprite_mapping[i++].img = NULL; //Necessaire pour pouvoir destroy chaque image apres.
 	game.mlx = mlx_init();
 	load_sprites(&game);
 	i = 0;
 	fd = open("map.ber", O_RDONLY);
 	parse_ber_file(fd, &game);
 	close(fd);
-	game.win = mlx_new_window(game.mlx, ft_strlen(game.map[0])*64 - 64, game.height*64 - 64, "PeepoPog");
+	mlx_new_image(game.mlx, game.width, game.height*64);
+	game.win = mlx_new_window(game.mlx, game.width, game.height*64, "PeepoPog");
 	render_map(&game);
 //	mlx_loop(game.mlx);
+	img_destr(&game);
 	while (game.map[i])
 	{
 		free(game.map[i]);
 		i++;
 	}
 	free(game.map);
+	mlx_destroy_window(game.mlx, game.win);
 	return 0;
 }

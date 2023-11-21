@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:59:44 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/20 17:25:54 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/21 10:27:59 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	map_height(void)
 		i++;
 	}
 	close(fd);
-	fd = open("map.ber", O_RDONLY);
 	return (i);
 }
 
@@ -54,10 +53,8 @@ void	parse_ber_file(int fd, t_map *mapping)
 	mapping->height = map_height();
 	mapping->map = malloc((mapping->height + 1)* sizeof(char *));
 	if (!mapping->map)
-	{
-		free (mapping->map);
 		return;
-	}
+	fd = open("map.ber", O_RDONLY);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -67,6 +64,7 @@ void	parse_ber_file(int fd, t_map *mapping)
 		i++;
 	}
 	mapping->map[i] = 0;
+	mapping->width = ft_strlen(mapping->map[0])*64 - 64;
 }
 /*
 int main()

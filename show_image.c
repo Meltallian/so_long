@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:55:38 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/20 14:27:52 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/21 09:41:35 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ int	main(void)
 	mlx_put_image_to_window(mlx, mlx_win, img.img[3], 0, 64);
 	mlx_put_image_to_window(mlx, mlx_win, img.img[0], 64, 64);
 	mlx_put_image_to_window(mlx, mlx_win, img.img[4], 64, 64);
-	mlx_loop(mlx);
+//	mlx_loop(mlx);
 }
  */
