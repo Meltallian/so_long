@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/21 14:24:54 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/21 17:55:53 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ typedef struct	s_data {
 	int		endian;
 }			t_data;
 
-typedef struct s_character {
+typedef struct s_chara {
 	int	x;
 	int	y;
-}			t_character;
+	int	a;
+	int	b;
+	int	found;
+}			t_chara;
 typedef struct s_sprite {
 	void	*img;
 	int		width;
@@ -58,7 +61,7 @@ typedef	struct s_map {
 	int	height;
 	int	i;
 	t_sprite sprite_mapping[256];
-	t_character character;
+	t_chara chara;
 }		t_map;
 
 void	parse_ber_file(t_map *mapping);

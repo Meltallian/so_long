@@ -6,11 +6,42 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:23:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/21 14:57:15 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/21 17:58:45 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+
+void	character_pos(t_map *game)
+{
+	game->chara.a = 0;
+	game->chara.b = 0;
+	game->chara.found = 0;
+	while (game->map[game->chara.a] && !game->chara.found)
+	{
+		while (game->map[game->chara.a][game->chara.b] &&
+			 game->map[game->chara.a][game->chara.b] != '\n')
+		{
+			if (game->map[game->chara.a][game->chara.b] == 'P')
+			{
+				game->chara.found = 1;
+				break;
+			}
+			game->chara.b++;
+		}
+		if (!game->chara.found)
+		{
+			game->chara.a++;
+			game->chara.b = 0;
+		}
+	}
+	if (game->chara.found)
+	{
+		game->chara.x = game->chara.b * 64;
+		game->chara.y = game->chara.a * 64;
+	}
+}
 
 void	load_sprites(t_map *game)
 {
@@ -40,16 +71,19 @@ void	render_map(t_map *game)
 		{
 			tile = (unsigned char)game->map[i][j];
 			mlx_put_image_to_window(game->mlx, game->win,
-				 game->sprite_mapping['0'].img, j * 64, i * 64);
-			mlx_put_image_to_window(game->mlx, game->win,
-				 game->sprite_mapping[tile].img, j * 64, i * 64);
+				game->sprite_mapping['0'].img, j * 64, i * 64);
+			if (game->map[i][j] != 'P')
+			{
+				mlx_put_image_to_window(game->mlx, game->win,
+					 game->sprite_mapping[tile].img, j * 64, i * 64);
+			}
 			j++;
 		}
 		j = 0;
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win,
-		 game->sprite_mapping['P'].img, game->character.x, game->character.y);
+		 game->sprite_mapping['P'].img, game->chara.x, game->chara.y);
 }
 
 void	img_destr(t_map *map)
@@ -74,47 +108,17 @@ int	key_hook(int keycode, t_map *game)
 
 	tile_size = 64;
 	if (keycode == KEY_ESC)
-		exit(0);
+		exit(0); // destroy window etc
 	if (keycode == KEY_A)
-		game->character.x -= tile_size;
+		game->chara.x -= tile_size;
 	if (keycode == KEY_W)
-		game->character.y -= tile_size;
+		game->chara.y -= tile_size;
 	if (keycode == KEY_D)
-		game->character.x += tile_size;
+		game->chara.x += tile_size;
 	if (keycode == KEY_S)
-		game->character.y += tile_size;
+		game->chara.y += tile_size;
 	render_map(game);
 	return (0);
-}
-
-void	character_pos(t_map *game)
-{
-	int	i;
-	int j;
-	int found;
-
-	i = 0;
-	j = 0;
-	found = 0;
-	while (game->map[i] && !found)
-	{
-		while (game->map[i][j] && game->map[i][j] != '\n')
-		{
-			if (game->map[i][j] == 'P')
-			{
-				found = 1;
-				break;
-			}
-			j++;
-		}
-		if (!found)
-			i++;
-	}
-	if (found)
-	{
-		game->character.x = j * 64;
-		game->character.y = i * 64;
-	}
 }
 
 int main()

@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:59:44 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/21 13:22:50 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/21 15:35:27 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_free(char **map, int i)
 		i--;
 	}
 }
+
 
 void	parse_ber_file(t_map *mapping)
 {
