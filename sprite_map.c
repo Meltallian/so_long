@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:23:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/21 11:03:11 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/21 14:57:15 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	render_map(t_map *game)
 		j = 0;
 		i++;
 	}
+	mlx_put_image_to_window(game->mlx, game->win,
+		 game->sprite_mapping['P'].img, game->character.x, game->character.y);
 }
 
 void	img_destr(t_map *map)
@@ -66,26 +68,79 @@ void	img_destr(t_map *map)
 	}
 }
 
+int	key_hook(int keycode, t_map *game)
+{
+	int tile_size;
+
+	tile_size = 64;
+	if (keycode == KEY_ESC)
+		exit(0);
+	if (keycode == KEY_A)
+		game->character.x -= tile_size;
+	if (keycode == KEY_W)
+		game->character.y -= tile_size;
+	if (keycode == KEY_D)
+		game->character.x += tile_size;
+	if (keycode == KEY_S)
+		game->character.y += tile_size;
+	render_map(game);
+	return (0);
+}
+
+void	character_pos(t_map *game)
+{
+	int	i;
+	int j;
+	int found;
+
+	i = 0;
+	j = 0;
+	found = 0;
+	while (game->map[i] && !found)
+	{
+		while (game->map[i][j] && game->map[i][j] != '\n')
+		{
+			if (game->map[i][j] == 'P')
+			{
+				found = 1;
+				break;
+			}
+			j++;
+		}
+		if (!found)
+			i++;
+	}
+	if (found)
+	{
+		game->character.x = j * 64;
+		game->character.y = i * 64;
+	}
+}
+
 int main()
 {
 	t_map	game;
-	int		fd;
 	int		i;
 
 	i = 0;
 	while (i < 256)
 		game.sprite_mapping[i++].img = NULL; //Necessaire pour pouvoir destroy chaque image apres.
+
 	game.mlx = mlx_init();
 	load_sprites(&game);
-	i = 0;
-	fd = open("map.ber", O_RDONLY);
-	parse_ber_file(fd, &game);
-	close(fd);
-	mlx_new_image(game.mlx, game.width, game.height*64);
+
+	parse_ber_file(&game);
 	game.win = mlx_new_window(game.mlx, game.width, game.height*64, "PeepoPog");
+	mlx_new_image(game.mlx, game.width, game.height*64);
+
+	character_pos(&game);
 	render_map(&game);
-//	mlx_loop(game.mlx);
+
+	mlx_key_hook(game.win, key_hook, &game);
+	mlx_loop(game.mlx);
+
 	img_destr(&game);
+	i = 0;
 	while (game.map[i])
 	{
 		free(game.map[i]);

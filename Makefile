@@ -21,7 +21,7 @@ $(MLX):
 	make -C ./minilibx_macos
 
 $(NAME): $(LIBFT) $(MLX) $(SO_LONG_OBJ)
-	$(CC) $(SO_LONG_OBJ) $(LIBFT) $(MLX) -o $(NAME) -L./libft -L./minilibx_macos -lft -lmlx -framework OpenGL -framework AppKit
+	$(CC) $(SO_LONG_OBJ) $(LIBFT) $(MLX) -o $(NAME) -L./libft -lft -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
 clean:
 	make clean -C ./libft
@@ -37,5 +37,8 @@ re: fclean all
 
 run: $(NAME)
 	./$(NAME)
+
+leaks: $(NAME)
+	leaks --atExit -- ./$(NAME)
 
 .PHONY: all clean fclean re run
