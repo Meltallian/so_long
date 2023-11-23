@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/21 17:55:53 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:41:41 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,20 @@ typedef struct s_sprite {
 
 typedef	struct s_map {
 	char	**map;
+	char	**mapcpy;
 	void	*mlx;
 	void	*win;
 	int	width;
 	int	height;
 	int	i;
+	int	candcount;
 	t_sprite sprite_mapping[256];
 	t_chara chara;
 }		t_map;
 
 void	parse_ber_file(t_map *mapping);
-void	ft_free(char **map, int i);
+void	parse_ber_filecpy(t_map *mapping);
+//void	ft_free(char **map, int i);
 int		map_height(void);
 
 #endif // SO_LONG_H

@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
 LIBFT = libft/libft.a
 MLX = minilibx_macos/libmlx.a
-SO_LONG_SRC = ber_parse.c show_image.c sprite_map.c
+SO_LONG_SRC = ber_parse.c sprite_map.c
 SO_LONG_OBJ = $(SO_LONG_SRC:.c=.o)
 #INCLUDES_DIR = -I./includes -I./libft/includes -I./minilibx_macos/includes
 #pas necessaire parceque -lft -lmlx dans la ligne cc
