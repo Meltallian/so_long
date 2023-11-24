@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:23:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/23 17:23:22 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/24 12:02:15 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,35 +176,29 @@ int	map_similar(t_map *game)
 	return (0);
 }
 
-int	valid_path(t_map *game)
+int	p_tiling(t_map *game)
 {
 	int	x;
 	int	y;
 
 	x = game->chara.x / 64;
 	y = game->chara.y / 64;
-	while (game->mapcpy[y][x + 1] == 0)
-	{
-		game->mapcpy[y][x] = 'P';
-		x += 1;
-	}
-	while (game->mapcpy[y][x - 1])
-	{
-		game->mapcpy[y][x] = 'P';
-		x -= 1;
-	}
-	while (game->mapcpy[y + 1][x])
-	{
-		game->mapcpy[y][x] = 'P';
-		y += 1;
-	}
-	while (game->mapcpy[y - 1][x])
-	{
-		game->mapcpy[y][x] = 'P';
-		y -= 1;
-	}
+	if (game->mapcpy[y][x + 1] == 0 || game->mapcpy[y][x + 1] == 'E'
+		|| game->mapcpy[y][x + 1] == 'C')
+		game->mapcpy[y][x + 1] = 'P';
+	if (game->mapcpy[y][x - 1] == 0 || game->mapcpy[y][x - 1] == 'E'
+		|| game->mapcpy[y][x - 1] == 'C')
+		game->mapcpy[y][x - 1] = 'P';
+	if (game->mapcpy[y + 1][x] == 0 || game->mapcpy[y + 1][x] == 'E'
+		|| game->mapcpy[y + 1][x] == 'C')
+		game->mapcpy[y + 1][x] = 'P';
+	if (game->mapcpy[y - 1][x] == 0 || game->mapcpy[y - 1][x] == 'E'
+		|| game->mapcpy[y - 1][x] == 'C')
+		game->mapcpy[y - 1][x] = 'P';
 	return (0);
 }
+
+int	valid_path(t_map *game);
 
 int	wallhit(int direction, t_map *game)
 {
