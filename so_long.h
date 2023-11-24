@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/23 16:41:41 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:32:25 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@
 #  define KEY_ESC 53
 # endif
 
-typedef struct	s_data {
-	void	*img[5];
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
-
 typedef struct s_chara {
 	int	x;
 	int	y;
@@ -60,7 +52,6 @@ typedef	struct s_map {
 	void	*win;
 	int	width;
 	int	height;
-	int	i;
 	int	candcount;
 	t_sprite sprite_mapping[256];
 	t_chara chara;
@@ -68,7 +59,6 @@ typedef	struct s_map {
 
 void	parse_ber_file(t_map *mapping);
 void	parse_ber_filecpy(t_map *mapping);
-//void	ft_free(char **map, int i);
 int		map_height(void);
 
 #endif // SO_LONG_H

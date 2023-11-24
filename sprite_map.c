@@ -6,11 +6,31 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:23:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/24 12:02:15 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:59:27 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_map(t_map *game)
+{
+	int	i;
+
+	i = 0;
+	while (game->map[i])
+	{
+		free(game->map[i]);
+		i++;
+	}
+	free(game->map);
+	i = 0;
+	while (game->mapcpy[i])
+	{
+		free(game->mapcpy[i]);
+		i++;
+	}
+	free(game->mapcpy);
+}
 
 int	destroy(t_map *game)
 {
@@ -27,12 +47,7 @@ int	destroy(t_map *game)
 		i++;
 	}
 	i = 0;
-	while (game->map[i])
-	{
-		free(game->map[i]);
-		i++;
-	}
-	free(game->map);
+	free_map(game);
 	mlx_destroy_window(game->mlx, game->win);
 	exit (0);
 	return (0);
@@ -152,53 +167,94 @@ void	candynum(t_map *game)
 	game->candcount = candycount;
 }
 
-int	map_similar(t_map *game)
+int	map_check(t_map *game)
 {
-	int				i;
-	int				j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	while (game->map[i])
+	while (game->mapcpy[i])
 	{
-		while (game->map[i][j] && game->map[i][j] != '\n')
+		while (game->mapcpy[i][j] && game->mapcpy[i][j] != '\n')
 		{
-			if (game->mapcpy[i][j] != game->map[i][j])
-			{
-				if (game->mapcpy[i][j] != 'P')
-					return (1);
-			}
+			if (game->mapcpy[i][j] == 'C' || game->mapcpy[i][j] == 'E')
+				return (0);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
-int	p_tiling(t_map *game)
+void	flood_pogging(t_map *game, int x, int y)
+{
+	if (x < 0 || y < 0 || x >= game->width || y >= game->height)
+		return;
+	if (game->mapcpy[y][x] != '0' &&
+		game->mapcpy[y][x] != 'C' &&
+		game->mapcpy[y][x] != 'E')
+		return;
+	game->mapcpy[y][x] = 'P';
+	flood_pogging(game, x + 1, y);
+	flood_pogging(game, x - 1, y);
+	flood_pogging(game, x, y + 1);
+	flood_pogging(game, x, y - 1);
+}
+
+int	check_1_border(t_map *game)
+{
+	int	j;
+	int	height;
+	int width;
+
+	height = game->height - 1;
+	width = game->width/64;
+	j = 0;
+	while (game->map[0][j] && game->map[0][j] != '\n')
+	{
+		if (game->map[0][j] != '1' || game->map[height][j] != '1')
+			return (0);
+		j++;
+	}
+	j = 0;
+	while (j <= height)
+	{
+		if (game->map[j][0] != '1' || game->map[j][width - 1] != '1')
+			return (0);
+		j++;
+	}
+	return (1);
+}
+/*
+int	is_rekt(t_map game)
+{
+	int	i;
+	int	j;
+	int	length;
+	int
+
+	i = 0;
+	j = 0;
+
+}
+ */
+void	valid_path(t_map *game)
 {
 	int	x;
 	int	y;
 
-	x = game->chara.x / 64;
-	y = game->chara.y / 64;
-	if (game->mapcpy[y][x + 1] == 0 || game->mapcpy[y][x + 1] == 'E'
-		|| game->mapcpy[y][x + 1] == 'C')
-		game->mapcpy[y][x + 1] = 'P';
-	if (game->mapcpy[y][x - 1] == 0 || game->mapcpy[y][x - 1] == 'E'
-		|| game->mapcpy[y][x - 1] == 'C')
-		game->mapcpy[y][x - 1] = 'P';
-	if (game->mapcpy[y + 1][x] == 0 || game->mapcpy[y + 1][x] == 'E'
-		|| game->mapcpy[y + 1][x] == 'C')
-		game->mapcpy[y + 1][x] = 'P';
-	if (game->mapcpy[y - 1][x] == 0 || game->mapcpy[y - 1][x] == 'E'
-		|| game->mapcpy[y - 1][x] == 'C')
-		game->mapcpy[y - 1][x] = 'P';
-	return (0);
+	x = game->chara.x/64;
+	y = game->chara.y/64;
+	game->mapcpy[y][x] = '0';
+	flood_pogging(game, x, y);
+	if (map_check(game) == 0 || check_1_border(game) == 0)
+	{
+		ft_printf("bruh, la map marche pas");
+		destroy(game);
+	}
 }
-
-int	valid_path(t_map *game);
 
 int	wallhit(int direction, t_map *game)
 {
