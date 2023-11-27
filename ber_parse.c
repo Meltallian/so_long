@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:59:44 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/24 15:32:21 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/27 16:58:51 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	map_height(void)
 
 	fd = open("map.ber", O_RDONLY);
 	if (fd == -1)
-		return 0;
+		return (0);
 	i = 0;
 	while (1)
 	{
@@ -42,9 +42,9 @@ void	parse_ber_file(t_map *mapping)
 
 	i = 0;
 	mapping->height = map_height();
-	mapping->map = malloc((mapping->height + 1)* sizeof(char *));
+	mapping->map = malloc((mapping->height + 1) * sizeof(char *));
 	if (!mapping->map)
-		return;
+		return ;
 	fd = open("map.ber", O_RDONLY);
 	while (1)
 	{
@@ -55,7 +55,7 @@ void	parse_ber_file(t_map *mapping)
 		i++;
 	}
 	mapping->map[i] = 0;
-	mapping->width = ft_strlen(mapping->map[0])*64 - 64;
+	mapping->width = ft_strlen(mapping->map[0]) * 64 - 64;
 	close(fd);
 }
 
@@ -66,9 +66,9 @@ void	parse_ber_filecpy(t_map *mapping)
 	int		fd;
 
 	i = 0;
-	mapping->mapcpy = malloc((mapping->height + 1)* sizeof(char *));
+	mapping->mapcpy = malloc((mapping->height + 1) * sizeof(char *));
 	if (!mapping->mapcpy)
-		return;
+		return ;
 	fd = open("map.ber", O_RDONLY);
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/24 15:32:25 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/27 17:10:57 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@
 #  define KEY_ESC 53
 # endif
 
+typedef struct s_coor {
+	int	x;
+	int	y;
+	int	z;
+	int	c;
+	int	e;
+	int	p;
+}			t_coor;
+
 typedef struct s_chara {
 	int	x;
 	int	y;
@@ -39,22 +48,24 @@ typedef struct s_chara {
 	int	b;
 	int	found;
 }			t_chara;
+
 typedef struct s_sprite {
 	void	*img;
 	int		width;
 	int		height;
 }			t_sprite;
 
-typedef	struct s_map {
-	char	**map;
-	char	**mapcpy;
-	void	*mlx;
-	void	*win;
-	int	width;
-	int	height;
-	int	candcount;
-	t_sprite sprite_mapping[256];
-	t_chara chara;
+typedef struct s_map {
+	char		**map;
+	char		**mapcpy;
+	void		*mlx;
+	void		*win;
+	int			width;
+	int			height;
+	int			candcount;
+	t_sprite	sprite_mapping[256];
+	t_chara		chara;
+	t_coor		coor;
 }		t_map;
 
 void	parse_ber_file(t_map *mapping);
