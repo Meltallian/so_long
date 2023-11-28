@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:45:19 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 15:55:27 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 18:02:01 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,17 @@ int	wallhit(int direction, t_map *game)
 
 	x = game->chara.x / 64;
 	y = game->chara.y / 64;
-	if (direction == KEY_A && game->map[y][x - 1] == '1')
+	if (direction == KEY_A && (game->map[y][x - 1] == '1'
+		||game->map[y][x - 1] == 'R' || game->map[y][x - 1] == 'L'))
 		return (1);
-	if (direction == KEY_W && game->map[y - 1][x] == '1')
+	if (direction == KEY_W && (game->map[y - 1][x] == '1'
+		||game->map[y - 1][x] == 'R' || game->map[y - 1][x] == 'L'))
 		return (1);
-	if (direction == KEY_D && game->map[y][x + 1] == '1')
+	if (direction == KEY_D && (game->map[y][x + 1] == '1'
+		||game->map[y][x + 1] == 'R' || game->map[y][x + 1] == 'L'))
 		return (1);
-	if (direction == KEY_S && game->map[y + 1][x] == '1')
+	if (direction == KEY_S && (game->map[y + 1][x] == '1'
+		||game->map[y + 1][x] == 'R' || game->map[y + 1][x] == 'L'))
 		return (1);
 	return (0);
 }

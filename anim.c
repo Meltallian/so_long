@@ -6,31 +6,30 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:13:43 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 17:54:42 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 18:02:54 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 int	anim_utils(t_map *game, char c, int i, int j)
 {
 	if (c == 'R')
 	{
 		mlx_put_image_to_window(game->mlx, game->win,
-		game->sprite_mapping['R'].img, j * 64, i * 64);
+			game->sprite_mapping['R'].img, j * 64, i * 64);
 		game->map[i][j] = 'R';
 	}
 	if (c == 'L')
 	{
 		mlx_put_image_to_window(game->mlx, game->win,
-		game->sprite_mapping['L'].img, j * 64, i * 64);
+			game->sprite_mapping['L'].img, j * 64, i * 64);
 		game->map[i][j] = 'L';
 	}
 	if (c == '1')
 	{
 		mlx_put_image_to_window(game->mlx, game->win,
-		game->sprite_mapping['1'].img, j * 64, i * 64);
+			game->sprite_mapping['1'].img, j * 64, i * 64);
 		game->map[i][j] = '1';
 	}
 	return (0);
