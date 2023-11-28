@@ -6,19 +6,20 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:59:44 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 15:10:31 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 15:30:48 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	map_height(void)
+int	map_height(t_map *game)
 {
 	char	*line;
 	int		fd;
 	int		i;
 
-	fd = open("map.ber", O_RDONLY);
+	game->ber = "map.ber";
+	fd = open(game->ber, O_RDONLY);
 	if (fd == -1)
 		return (0);
 	i = 0;
@@ -41,11 +42,11 @@ void	parse_ber_file(t_map *mapping)
 	int		fd;
 
 	i = 0;
-	mapping->height = map_height();
+	mapping->height = map_height(mapping);
 	mapping->map = malloc((mapping->height + 1) * sizeof(char *));
 	if (!mapping->map)
 		return ;
-	fd = open("map.ber", O_RDONLY);
+	fd = open(mapping->ber, O_RDONLY);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -69,7 +70,7 @@ void	parse_ber_filecpy(t_map *mapping)
 	mapping->mapcpy = malloc((mapping->height + 1) * sizeof(char *));
 	if (!mapping->mapcpy)
 		return ;
-	fd = open("map.ber", O_RDONLY);
+	fd = open(mapping->ber, O_RDONLY);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -81,26 +82,3 @@ void	parse_ber_filecpy(t_map *mapping)
 	mapping->mapcpy[i] = 0;
 	close(fd);
 }
-
-/*
-int main()
-{
-	t_map	mapping;
-	int		fd;
-	int		i;
-
-	mapping.map = 0;
-	i = 0;
-	fd = open("map.ber", O_RDONLY);
-	parse_ber_file(fd, &mapping);
-	close(fd);
-	while (mapping.map[i])
-	{
-		printf("%s", mapping.map[i]);
-		free(mapping.map[i]);
-		i++;
-	}
-	free(mapping.map);
-	return 0;
-}
- */

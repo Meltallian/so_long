@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 15:10:40 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 15:28:14 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_map {
 
 void	parse_ber_file(t_map *mapping);
 void	parse_ber_filecpy(t_map *mapping);
-int		map_height(void);
+int		map_height(t_map *game);
 int		check_1_border(t_map *game);
 int		is_rekt(t_map *game);
 void	check_comps(t_map *game);
