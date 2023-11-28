@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:44:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 14:45:04 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 16:01:55 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	valid_comps(t_map *game)
 
 void	valid_path(t_map *game)
 {
-	if (valid_comps(game) == 0)
+	if (valid_comps(game) == 0 || invalid_cell(game) == 0)
 	{
 		ft_printf("Mon reuf, t'as mal géré les composants.");
 		destroy(game);

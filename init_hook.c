@@ -1,16 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils4.c                                           :+:      :+:    :+:   */
+/*   init_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:45:19 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 15:05:12 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 15:55:27 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	invalid_cell(t_map *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (game->map[i])
+	{
+		while (game->map[i][j] && game->map[i][j] != '\n')
+		{
+			if (game->map[i][j] != 'C' && game->map[i][j] != 'E'
+				&& game->map[i][j] != 'P' && game->map[i][j] != '0'
+				&& game->map[i][j] != '1')
+				return (0);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (1);
+}
 
 int	wallhit(int direction, t_map *game)
 {

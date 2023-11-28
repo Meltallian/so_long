@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:59:44 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 15:30:48 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 15:51:54 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	map_height(t_map *game)
 	int		fd;
 	int		i;
 
-	game->ber = "map.ber";
 	fd = open(game->ber, O_RDONLY);
 	if (fd == -1)
 		return (0);
