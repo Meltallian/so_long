@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/27 17:10:57 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 15:10:40 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_map {
 	int			width;
 	int			height;
 	int			candcount;
+	char		*ber;
 	t_sprite	sprite_mapping[256];
 	t_chara		chara;
 	t_coor		coor;
@@ -71,5 +72,22 @@ typedef struct s_map {
 void	parse_ber_file(t_map *mapping);
 void	parse_ber_filecpy(t_map *mapping);
 int		map_height(void);
-
+int		check_1_border(t_map *game);
+int		is_rekt(t_map *game);
+void	check_comps(t_map *game);
+void	flood_pogging(t_map *game, int x, int y);
+int		mapcpy_check(t_map *game);
+int		key_dep(int keycode, t_map *game);
+int		key_hook(int keycode, t_map *game);
+int		init(t_map *game);
+void	render_map(t_map *game);
+void	load_sprites(t_map *game);
+int		wallhit(int keycode, t_map *game);
+int		candy(t_map *game);
+void	candynum(t_map *game);
+void	exitdoor(t_map *game);
+void	free_map(t_map *game);
+int		destroy(t_map *game);
+void	character_pos(t_map *game);
+void	valid_path(t_map *game);
 #endif // SO_LONG_H
