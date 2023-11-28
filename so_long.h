@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 17:55:00 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 18:18:18 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int		invalid_cell(t_map *game);
 void	anim(t_map *game);
 int		anim_utils(t_map *game, char c, int i, int j);
 void	anim(t_map *game);
+int		check_ber(t_map *game);
 
 #endif // SO_LONG_H

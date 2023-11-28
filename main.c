@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:23:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 18:13:45 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/28 18:15:01 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_ber(t_map *game)
 {
-	const char	*ber_ext = ".ber";
+	char	*ber_ext = ".ber";
 	size_t ber_len;
 	size_t filename_len;
 
