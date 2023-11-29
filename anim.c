@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:13:43 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 18:02:54 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/29 14:30:51 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	anim(t_map *game)
 	{
 		while (game->map[i][j] && game->map[i][j] != '\n')
 		{
-			if (game->map[i][j] == '1' && k % 3 == 1)
+			if (game->map[i][j] == '1' && k % 2 == 1)
 				anim_utils(game, 'R', i, j);
 			else if (game->map[i][j] == 'R' || game->map[i][j] == 'L')
 			{
 				anim_utils(game, '1', i, j);
 				k++;
 			}
-			else if (game->map[i][j] == '1' && k % 3 == 0)
+			else if (game->map[i][j] == '1' && k % 2 == 0)
 				anim_utils(game, 'L', i, j);
 			j++;
 		}
