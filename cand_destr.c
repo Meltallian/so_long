@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   cand_destr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:38:48 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 14:39:56 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:49:26 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,8 @@ void	exitdoor(t_map *game)
 	x = game->chara.x / 64;
 	y = game->chara.y / 64;
 	if (game->map[y][x] == 'E' && candy(game) == 1)
+	{
+		ft_printf("Congratulations, you have proven yourself worthy.");
 		destroy(game);
+	}
 }
