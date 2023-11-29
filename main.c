@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:23:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/29 17:30:28 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:40:10 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	main(void)
 		ft_printf("Error\nIt ain't a '.ber' file mon reuf.");
 		return (0);
 	}
+
 	init(&game);
 	destroy(&game);
 	return (0);
