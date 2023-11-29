@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:44:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 16:01:55 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:03:31 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,24 +100,24 @@ void	valid_path(t_map *game)
 {
 	if (valid_comps(game) == 0 || invalid_cell(game) == 0)
 	{
-		ft_printf("Mon reuf, t'as mal géré les composants.");
+		ft_printf("Error\nMon reuf, t'as mal géré les composants.");
 		destroy(game);
 	}
 	game->mapcpy[game->chara.y / 64][game->chara.x / 64] = '0';
 	flood_pogging(game, game->chara.x / 64, game->chara.y / 64);
 	if (mapcpy_check(game) == 0)
 	{
-		ft_printf("La map est pas realisable mono reuf.");
+		ft_printf("Error\nLa map est pas realisable mono reuf.");
 		destroy(game);
 	}
 	if (is_rekt(game) == 0)
 	{
-		ft_printf("Bruh, la map est pas rectangle.");
+		ft_printf("Error\nBruh, la map est pas rectangle.");
 		destroy(game);
 	}
 	if (check_1_border(game) == 0)
 	{
-		ft_printf("Bruh, where do be them 1s.");
+		ft_printf("Error\nLe sang, where do be them 1s.");
 		destroy(game);
 	}
 }

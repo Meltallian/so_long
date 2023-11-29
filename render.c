@@ -6,14 +6,26 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:44:24 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 17:54:37 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:32:11 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	sprites_utils(t_map *game)
+{
+	game->sprite_mapping['X'].img = mlx_xpm_file_to_image(game->mlx,
+			"images/enemy.xpm", &game->sprite_mapping['X'].width,
+			&game->sprite_mapping['X'].height);
+	game->sprite_mapping['Y'].img = mlx_xpm_file_to_image(game->mlx,
+			"images/enemy2.xpm", &game->sprite_mapping['Y'].width,
+			&game->sprite_mapping['Y'].height);
+	game->chara.found = 0;
+}
+
 void	load_sprites(t_map *game)
 {
+	sprites_utils(game);
 	game->sprite_mapping['P'].img = mlx_xpm_file_to_image(game->mlx,
 			"images/kawai.xpm", &game->sprite_mapping['P'].width,
 			&game->sprite_mapping['P'].height);
@@ -35,7 +47,6 @@ void	load_sprites(t_map *game)
 	game->sprite_mapping['R'].img = mlx_xpm_file_to_image(game->mlx,
 			"images/righttree.xpm", &game->sprite_mapping['R'].width,
 			&game->sprite_mapping['R'].height);
-	game->chara.found = 0;
 }
 
 void	character_pos(t_map *game)
@@ -67,6 +78,12 @@ void	character_pos(t_map *game)
 	}
 }
 
+void	render_utils(t_map *game, int j, int i, unsigned char tile)
+{
+	mlx_put_image_to_window(game->mlx, game->win,
+		game->sprite_mapping[tile].img, j * 64, i * 64);
+}
+
 void	render_map(t_map *game)
 {
 	int				i;
@@ -75,7 +92,8 @@ void	render_map(t_map *game)
 
 	i = 0;
 	j = 0;
-	anim(game);
+	tree_anim(game);
+	enemy_anim(game);
 	while (game->map[i])
 	{
 		while (game->map[i][j] && game->map[i][j] != '\n')
@@ -83,11 +101,8 @@ void	render_map(t_map *game)
 			tile = (unsigned char)game->map[i][j];
 			mlx_put_image_to_window(game->mlx, game->win,
 				game->sprite_mapping['0'].img, j * 64, i * 64);
-			if (game->map[i][j] != 'P'/*  && game->map[i][j] != '1' */)
-			{
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->sprite_mapping[tile].img, j * 64, i * 64);
-			}
+			if (game->map[i][j] != 'P')
+				render_utils(game, j, i, tile);
 			j++;
 		}
 		j = 0;
@@ -95,40 +110,4 @@ void	render_map(t_map *game)
 	}
 	mlx_put_image_to_window(game->mlx, game->win,
 		game->sprite_mapping['P'].img, game->chara.x, game->chara.y);
-}
-
-int	mapcpy_check(t_map *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (game->mapcpy[i])
-	{
-		while (game->mapcpy[i][j] && game->mapcpy[i][j] != '\n')
-		{
-			if (game->mapcpy[i][j] == 'C' || game->mapcpy[i][j] == 'E')
-				return (0);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (1);
-}
-
-void	flood_pogging(t_map *game, int x, int y)
-{
-	if (x < 0 || y < 0 || x >= game->width || y >= game->height)
-		return ;
-	if (game->mapcpy[y][x] != '0' &&
-		game->mapcpy[y][x] != 'C' &&
-		game->mapcpy[y][x] != 'E')
-		return ;
-	game->mapcpy[y][x] = 'P';
-	flood_pogging(game, x + 1, y);
-	flood_pogging(game, x - 1, y);
-	flood_pogging(game, x, y + 1);
-	flood_pogging(game, x, y - 1);
 }

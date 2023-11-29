@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:59:44 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 15:51:54 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:16:38 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,19 @@ void	parse_ber_filecpy(t_map *mapping)
 	}
 	mapping->mapcpy[i] = 0;
 	close(fd);
+}
+
+void	flood_pogging(t_map *game, int x, int y)
+{
+	if (x < 0 || y < 0 || x >= game->width || y >= game->height)
+		return ;
+	if (game->mapcpy[y][x] != '0' &&
+		game->mapcpy[y][x] != 'C' &&
+		game->mapcpy[y][x] != 'E')
+		return ;
+	game->mapcpy[y][x] = 'P';
+	flood_pogging(game, x + 1, y);
+	flood_pogging(game, x - 1, y);
+	flood_pogging(game, x, y + 1);
+	flood_pogging(game, x, y - 1);
 }

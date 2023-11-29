@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:17:31 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/28 18:18:18 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:43:08 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,15 @@ int		destroy(t_map *game);
 void	character_pos(t_map *game);
 void	valid_path(t_map *game);
 int		invalid_cell(t_map *game);
-void	anim(t_map *game);
-int		anim_utils(t_map *game, char c, int i, int j);
-void	anim(t_map *game);
+void	tree_anim(t_map *game);
+int		tree_anim_utils(t_map *game, char c, int i, int j);
+void	enemy_anim(t_map *game);
+int		enemy_anim_utils(t_map *game, char c, int i, int j);
 int		check_ber(t_map *game);
+void	sprites_utils(t_map *game);
+void	enemy_hit(int keycode, t_map *game);
+void	enemy_call(t_map *game);
+int		enemy_check(int keycode, t_map *game);
+
 
 #endif // SO_LONG_H
