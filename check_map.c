@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:44:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/29 17:03:31 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/01 12:29:33 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	valid_path(t_map *game)
 	flood_pogging(game, game->chara.x / 64, game->chara.y / 64);
 	if (mapcpy_check(game) == 0)
 	{
-		ft_printf("Error\nLa map est pas realisable mono reuf.");
+		ft_printf("Error\nLa map est pas realisable mon reuf.");
 		destroy(game);
 	}
 	if (is_rekt(game) == 0)

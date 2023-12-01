@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:23:45 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/11/29 17:40:10 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/01 12:30:38 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_ber(t_map *game)
 	else
 		return (0);
 }
-/*
+
 int	main(int ac, char **av)
 {
 	t_map	game;
@@ -42,8 +42,8 @@ int	main(int ac, char **av)
 	destroy(&game);
 	return (0);
 }
- */
 
+/*
 int	main(void)
 {
 	t_map	game;
@@ -58,4 +58,4 @@ int	main(void)
 	init(&game);
 	destroy(&game);
 	return (0);
-}
+} */
